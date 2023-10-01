@@ -14,26 +14,48 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+// router.post('/', upload.single('image'), async (req, res) => {
+//   try {
+//     if (req.file) {
+//       const publicUrl = `https://imageupload-dfsr.onrender.com/public/uploads/${req.file.originalname}`;
+       
+//       const imageData = new newImageSchema({
+//         filename: req.file.originalname,
+//         path: req.file.path,
+//         imageUrl: publicUrl // Save the URL to the database
+//       });
+
+//       await imageData.save();
+//       res.status(201).json(imageData);
+//     } else {
+//       res.status(400).json({ error: 'No file uploaded' });
+//     }
+//   } catch (e) {
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// });
+
 router.post('/', upload.single('image'), async (req, res) => {
-  try {
-    if (req.file) {
-      const publicUrl = `http://localhost:9000/public/uploads/${req.file.originalname}`;
-
-      const imageData = new newImageSchema({
-        filename: req.file.originalname,
-        path: req.file.path,
-        imageUrl: publicUrl // Save the URL to the database
-      });
-
-      await imageData.save();
-      res.status(201).json(imageData);
-    } else {
-      res.status(400).json({ error: 'No file uploaded' });
+    try {
+      if (req.file) {
+        const publicUrl = `https://imageupload-dfsr.onrender.com/public/uploads/${req.file.originalname}`;
+  
+        const imageData = new newImageSchema({
+          filename: req.file.originalname,
+          path: req.file.path,
+          imageUrl: publicUrl
+        });
+  
+        await imageData.save();
+        res.status(201).json(imageData);
+      } else {
+        res.status(400).json({ error: 'No file uploaded' });
+      }
+    } catch (e) {
+      res.status(500).json({ message: "Internal server error" });
     }
-  } catch (e) {
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
+  });
+  
 
 
 router.get('/', async (req, res) => {
