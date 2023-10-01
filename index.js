@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
   }
 });
 
-mongoose.connect('mongodb+srv://vedantassignment05:buBZNG020rQi97BY@uniqimage.s3onmvw.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://vedantassignment05:buBZNG020rQi97BY@uniqimage.s3onmvw.mongodb.net/uniqimage', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
