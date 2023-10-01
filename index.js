@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
   }
 });
 
-mongoose.connect('mongodb://127.0.0.1:27017/uniqImages', {
+mongoose.connect('mongodb+srv://vedantassignment05:buBZNG020rQi97BY@uniqimage.s3onmvw.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
