@@ -38,7 +38,7 @@ const upload = multer({ storage: storage });
 router.post('/', upload.single('image'), async (req, res) => {
     try {
       if (req.file) {
-        const publicUrl = `https://imageupload-dfsr.onrender.com/public/uploads/${req.file.originalname}`;
+        const publicUrl = `http://localhost:9000/public/uploads/${req.file.originalname}`;
   
         const imageData = new newImageSchema({
           filename: req.file.originalname,
@@ -57,15 +57,24 @@ router.post('/', upload.single('image'), async (req, res) => {
   });
   
 
-
-router.get('/', async (req, res) => {
+// using this not getting id with each entry 
+// router.get('/', async (req, res) => {
+//     try {
+//       const imageData = await newImageSchema.find({}, '-_id filename imageUrl');
+//       res.json(imageData);
+//     } catch (error) {
+//       res.status(500).json({ message: "Internal server error" });
+//     }
+//   });
+  
+// for getting id with dataentry 
+  router.get('/', async (req, res) => {
     try {
-      const imageData = await newImageSchema.find({}, '-_id filename imageUrl');
+      const imageData = await newImageSchema.find({}, '-__v'); // Exclude the '__v' field
       res.json(imageData);
     } catch (error) {
       res.status(500).json({ message: "Internal server error" });
     }
   });
-  
 
 module.exports = router;
