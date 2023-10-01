@@ -38,7 +38,7 @@ const upload = multer({ storage: storage });
 router.post('/', upload.single('image'), async (req, res) => {
     try {
       if (req.file) {
-        const publicUrl = `http://localhost:9000/public/uploads/${req.file.originalname}`;
+        const publicUrl = `https://imageupload-dfsr.onrender.com/public/uploads/${req.file.originalname}`;
   
         const imageData = new newImageSchema({
           filename: req.file.originalname,
